@@ -24,10 +24,10 @@
     #define _ARGS_17(F, ...) _ARGS_16(__VA_ARGS__)
     #define _ARGS(...) _ARGS_17(__VA_ARGS__,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,)
     #define LOG(...) CAT(_LOG, _ARGS(__VA_ARGS__))(__VA_ARGS__)
-    #define _LOG0(msg) \
+    #define _LOG0(msg)  \
         do { fprintf(stderr, "LOG> " msg "\n"); fflush(stderr); } while (0)
     #define _LOG1(msg, ...) \
-        do { fprintf(stderr, "LOG> " msg "\n", __VA_ARGS__); \
+        do { fprintf(stderr, "LOG> " msg "\n", __VA_ARGS__);    \
         fflush(stderr); } while (0)
 #else
     #define LOG(...) do { } while (0)

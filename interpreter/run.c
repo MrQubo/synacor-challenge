@@ -22,23 +22,23 @@
 #define IFEQ20(T, F) F
 #define IFEQ21(T, F) F
 #define IFEQ22(T, F) T
-#define ARG_T_2(N) word CAT(arg, N) = readIPLiteralAndAdvance(state);
-#define ARG_T_1(N) word CAT(arg, N) = readIPAndAdvance(state);
-#define ARG(N, A) \
-    IFEQ(A, 2, DEFER(ARG_T_2), EMPTY)(N) \
+#define ARG_T_2(N) word CAT(arg, N) = readIPLiteralAndAdvance(state)
+#define ARG_T_1(N) word CAT(arg, N) = readIPAndAdvance(state)
+#define ARG(N, A)   \
+    IFEQ(A, 2, DEFER(ARG_T_2), EMPTY)(N)    \
     IFEQ(A, 1, DEFER(ARG_T_1), EMPTY)(N)
 #define ZERO(...) 0
 #define ONE(...) 1
-#define CT1(C) \
+#define CT1(C)  \
     IFEQ(C, 0, 2, 3)
-#define CT2(B, C) \
+#define CT2(B, C)   \
     IFEQ(B, 0, ONE, CT1)(C)
 #define CT(A, B, C) \
     IFEQ(A, 0, ZERO, CT2)(B, C)
 #define PROLOGUE(NAME, A, B, C) \
-    ARG(1, A)   \
-    ARG(2, B)   \
-    ARG(3, C)   \
+    ARG(1, A);  \
+    ARG(2, B);  \
+    ARG(3, C);  \
     CAT(LOGA, CT(A, B, C))(STR(NAME));
 #define EPILOGUE(...) return 1;
 
