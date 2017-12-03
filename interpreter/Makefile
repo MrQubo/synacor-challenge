@@ -7,10 +7,11 @@ EXE    = interpreter
 
 # Compiler, Linker Defines
 CC      = /usr/bin/gcc
-CFLAGS  = -std=c99 -pedantic -Wall -Wextra -O3
+WARN	= -pedantic -Wall -Wextra
+CFLAGS  = -std=c11 $(WARN) -O3
 LIBPATH = -L.
-LDFLAGS = -std=c99 -o $(EXE) $(LIBPATH) $(LIBS)
-CFDEBUG = -pedantic -Wall -Wextra -ggdb -DDEBUG $(LDFLAGS)
+LDFLAGS = -std=c11 $(WARN) -o $(EXE) $(LIBPATH) $(LIBS)
+CFDEBUG = $(LDFLAGS) -ggdb -DDEBUG
 RM      = /bin/rm -f
 
 all: $(EXE)
