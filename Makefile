@@ -1,38 +1,13 @@
-# Source, Executable, Includes, Library Defines
-INCL   =
-SRC    = main.c readFile.c state.c run.c
-OBJ    = $(SRC:.c=.o)
-LIBS   =
-EXE    = interpreter
+SHELL = /bin/bash
+MV = mv
+INTERPRETER = ./arch_interpreter
 
-# Compiler, Linker Defines
-CC      = /usr/bin/gcc
-CFLAGS  = -std=c99 -pedantic -Wall -Wextra -O3
-LIBPATH = -L.
-LDFLAGS = -std=c99 -o $(EXE) $(LIBPATH) $(LIBS)
-CFDEBUG = -pedantic -Wall -Wextra -ggdb -DDEBUG $(LDFLAGS)
-RM      = /bin/rm -f
+$(INTERPRETER):
+	$(MAKE) -C interpreter build
+	$(MV) interpreter/interpreter $(INTERPRETER)
 
-all: $(EXE)
-build: $(EXE) clean
+run%: $(INTERPRETER)
+	cat <(cut -d"#" -f1 text_game/steps$* | sed "s/[[:space:]]*$$//") - \
+	| $(INTERPRETER) challenge.bin
 
-# Compile and Assemble C Source Files into Object Files
-%.o: %.c
-	$(CC) -c $(CFLAGS) $*.c
-
-# Link all Object Files with external Libraries into Binaries
-$(EXE): $(OBJ)
-	$(CC) $(LDFLAGS) $(OBJ)
-
-# Objects depend on these Libraries
-$(OBJ): $(INCL)
-
-# Create a gdb Capable Executable with DEBUG flags turned on
-debug:
-	$(CC) $(CFDEBUG) $(SRC)
-
-# Clean Up Objects, Dumps out of source directory
-clean:
-	$(RM) $(OBJ)
-
-.PHONY : clean debug
+.PHONY: run_text_game
