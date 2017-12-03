@@ -32,5 +32,4 @@ int main(int argc, char * argv[]) {
 
     free_state(state);
     return return_code;
-    return 0;
 }
