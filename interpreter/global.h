@@ -3,9 +3,6 @@
 
 #define EMPTY(...)
 #define DEFER(id) id EMPTY(,)
-#define DEFER2(id) id DEFER(EMPTY)(,)
-#define CATCH(id) DEFER(id) EMPTY
-#define CATCH2(id) DEFER2(id) CATCH(EMPTY)
 
 #define _CAT2(A, B) A ## B
 #define CAT(A, B) _CAT2(A, B)

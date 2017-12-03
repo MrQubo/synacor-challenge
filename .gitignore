@@ -1,3 +1,7 @@
+# Executables
+interpreter
+arch_interpreter
+
 # Prerequisites
 *.d
 
