@@ -45,7 +45,8 @@ _state * alloc_state(void) {
 }
 
 void free_state(_state *state) {
-    free(state->memory);
+    free(state->stack);
     free(state->registers);
+    free(state->memory);
     free(state);
 }
