@@ -68,7 +68,7 @@ word readRegister(_state *state, word reg) {
 }
 
 int pushStack(_state *state, word val) {
-    if (state->sp == state->stack_size) {
+    if (state->sp >= state->stack_size) {
         state->stack_size <<= 1;
         state->stack = realloc(state->stack, state->stack_size);
         if (!state->stack) {
